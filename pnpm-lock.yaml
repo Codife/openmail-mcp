@@ -20,6 +20,9 @@ importers:
       eslint:
         specifier: 9.37.0
         version: 9.37.0(jiti@2.7.0)
+      next:
+        specifier: 16.4.0
+        version: 16.4.0(@babel/core@7.29.7)(@playwright/test@1.55.1)(@types/node@24.7.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       prettier:
         specifier: 3.6.2
         version: 3.6.2
