@@ -7,7 +7,7 @@ OpenMail MCP is a self-hosted, multi-workspace email control plane for MCP-compa
 ## Quick start
 
 1. Install Node 22+ and pnpm 10.
-2. Copy `.env.example` to `.env.local` and fill in Supabase, a 32-byte base64 master key (`openssl rand -base64 32`), and a random MCP pepper.
+2. Copy `.env.example` to `.env` and fill in Supabase, a 32-byte base64 master key (`openssl rand -base64 32`), and a random MCP pepper.
 3. Run `pnpm install` and `pnpm db:migrate`.
 4. Run `pnpm setup`, then remove `BOOTSTRAP_PASSWORD`.
 5. Run `pnpm dev` and open `http://localhost:3000`.
