@@ -1,0 +1,2 @@
+import { describe,expect,it } from 'vitest'; import { sendMessageSchema,redact } from '@openmail/shared';
+describe('message safety',()=>{it('requires recipients, content, and idempotency',()=>expect(()=>sendMessageSchema.parse({to:[],subject:'x',cc:[],bcc:[],attachments:[],idempotencyKey:'short'})).toThrow());it('redacts nested secrets',()=>expect(redact({accessToken:'abc',nested:{password:'x'},safe:'ok'})).toEqual({accessToken:'[REDACTED]',nested:{password:'[REDACTED]'},safe:'ok'}));});

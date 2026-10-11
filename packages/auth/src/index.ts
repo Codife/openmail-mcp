@@ -1,0 +1,9 @@
+import { createCipheriv, createDecipheriv, createHash, randomBytes, timingSafeEqual } from 'node:crypto';
+
+export interface EncryptedSecret { v: number; alg: 'aes-256-gcm'; iv: string; tag: string; ciphertext: string }
+const keyBytes = (key: string) => { const bytes = Buffer.from(key, 'base64'); if (bytes.length !== 32) throw new Error('OPENMAIL_MASTER_KEY must decode to exactly 32 bytes'); return bytes; };
+export function encryptSecret(value: unknown, key: string, version = 1): EncryptedSecret { const iv = randomBytes(12); const cipher = createCipheriv('aes-256-gcm', keyBytes(key), iv); const ciphertext = Buffer.concat([cipher.update(JSON.stringify(value),'utf8'),cipher.final()]); return { v: version, alg:'aes-256-gcm', iv:iv.toString('base64'), tag:cipher.getAuthTag().toString('base64'), ciphertext:ciphertext.toString('base64') }; }
+export function decryptSecret<T>(payload: EncryptedSecret, key: string): T { const decipher = createDecipheriv(payload.alg,keyBytes(key),Buffer.from(payload.iv,'base64')); decipher.setAuthTag(Buffer.from(payload.tag,'base64')); return JSON.parse(Buffer.concat([decipher.update(Buffer.from(payload.ciphertext,'base64')),decipher.final()]).toString('utf8')) as T; }
+export function createBearerCredential(): { token: string; prefix: string } { const token = `omcp_${randomBytes(32).toString('base64url')}`; return { token, prefix: token.slice(0,13) }; }
+export const hashCredential = (token: string, pepper: string) => createHash('sha256').update(`${pepper}\0${token}`).digest('hex');
+export function verifyCredential(token: string, expectedHex: string, pepper: string): boolean { const actual=Buffer.from(hashCredential(token,pepper),'hex'); const expected=Buffer.from(expectedHex,'hex'); return actual.length===expected.length && timingSafeEqual(actual,expected); }

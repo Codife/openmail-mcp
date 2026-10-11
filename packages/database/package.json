@@ -1,0 +1,1 @@
+{"name":"@openmail/database","version":"0.1.0","type":"module","exports":"./src/index.ts","scripts":{"build":"tsc -p tsconfig.json","typecheck":"tsc -p tsconfig.json","lint":"eslint src"},"dependencies":{"@supabase/supabase-js":"2.76.1"},"devDependencies":{"typescript":"5.9.3"}}
