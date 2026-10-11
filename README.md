@@ -149,6 +149,8 @@ Import the GitHub repository into Vercel and configure:
 - Output directory: `apps/web/.next`
 - Node.js version: 22
 
+These values are also declared in the repository's `vercel.json`. Do not use the removed TypeScript configuration file; Vercel compiles configuration before running the application build.
+
 Vercel permits outbound SMTP except on port 25; OpenMail uses port 465 and awaits delivery before returning. The Node.js runtime supports the TCP sockets required by IMAP and SMTP. Do not select the Edge runtime for `/api/mcp`.
 
 ### Production environment variables
