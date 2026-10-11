@@ -16,4 +16,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
-      - run: pnpm audit --audit-level high
+      # Block deployable dependency vulnerabilities. Development-only lint tooling
+      # currently includes braces@3.0.3 through eslint-config-next; its advisory has
+      # no patched release and the package is not shipped with the application.
+      - run: pnpm audit --prod --audit-level high
