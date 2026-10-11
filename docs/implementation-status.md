@@ -40,7 +40,7 @@ No Hostinger message-content REST API is assumed. A Hostinger hPanel API token i
 ## Exact deployment steps
 
 1. Create a Supabase project. Disable public sign-ups and add `https://YOUR_DOMAIN/auth/callback` to Auth redirect URLs.
-2. Copy `.env.example` to `.env.local`. Set the Supabase values, `NEXT_PUBLIC_APP_URL`, a 32-byte base64 `OPENMAIL_MASTER_KEY` (`openssl rand -base64 32`), and an independent `MCP_TOKEN_PEPPER` of at least 32 characters. Never expose secrets with a `NEXT_PUBLIC_` prefix.
+2. Copy `.env.example` to `.env`. Set the Supabase values, `NEXT_PUBLIC_APP_URL`, a 32-byte base64 `OPENMAIL_MASTER_KEY` (`openssl rand -base64 32`), and an independent `MCP_TOKEN_PEPPER` of at least 32 characters. Never expose secrets with a `NEXT_PUBLIC_` prefix.
 3. Install Node.js 22+ and pnpm 10. Run `pnpm install --frozen-lockfile`.
 4. Authenticate and link the Supabase CLI, then run `pnpm db:migrate`. Confirm all migrations applied.
 5. From a trusted terminal set `BOOTSTRAP_EMAIL`, a strong temporary `BOOTSTRAP_PASSWORD`, and `BOOTSTRAP_WORKSPACE`; run `pnpm setup --non-interactive`. Remove `BOOTSTRAP_PASSWORD` immediately. Sign in and replace it when prompted.
