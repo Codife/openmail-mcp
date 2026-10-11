@@ -142,14 +142,14 @@ The plaintext token is displayed once. Rotation revokes the previous token immed
 Import the GitHub repository into Vercel and configure:
 
 - Production branch: `main`
-- Root directory: repository root
+- Root directory: `apps/web`
 - Framework preset: Next.js
-- Install command: `pnpm install --frozen-lockfile`
-- Build command: `pnpm --filter @openmail/web build`
-- Output directory: `apps/web/.next`
+- Install command: leave at the detected pnpm default
+- Build command: `pnpm build`
+- Output directory: leave at the Next.js default (`.next`)
 - Node.js version: 22
 
-These values are also declared in the repository's `vercel.json`. Do not use the removed TypeScript configuration file; Vercel compiles configuration before running the application build.
+Enable **Include source files outside of the Root Directory** in Vercel so the web application can bundle the shared workspace packages under `packages/`. The framework is also declared in `apps/web/vercel.json`.
 
 Vercel permits outbound SMTP except on port 25; OpenMail uses port 465 and awaits delivery before returning. The Node.js runtime supports the TCP sockets required by IMAP and SMTP. Do not select the Edge runtime for `/api/mcp`.
 
